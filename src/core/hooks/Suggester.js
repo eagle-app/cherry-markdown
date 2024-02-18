@@ -76,9 +76,14 @@ export default class Suggester extends SyntaxBase {
     super({ needCache: true });
 
     this.config = config;
-    this.RULE = this.rule();
     this.$cherry = cherry;
     this.suggesterPanel = new SuggesterPanel(cherry);
+
+    if (!this.inited) {
+      this.initConfig(this.config);
+    }
+
+    this.RULE = this.rule();
   }
 
   afterInit(callback) {
@@ -89,7 +94,6 @@ export default class Suggester extends SyntaxBase {
     if (typeof callback === 'function') {
       callback();
     }
-    this.initConfig(this.config);
   }
 
   /**
@@ -151,6 +155,8 @@ export default class Suggester extends SyntaxBase {
     if (this.suggesterPanel.hasEditor()) {
       this.suggesterPanel.editor = null;
     }
+
+    this.inited = true;
   }
 
   makeHtml(str) {
@@ -187,6 +193,7 @@ export default class Suggester extends SyntaxBase {
     if (!this.suggester || Object.keys(this.suggester).length <= 0) {
       return {};
     }
+
     const keys = Object.keys(this.suggester)
       .map((key) => escapeRegExp(key))
       .join('|');
