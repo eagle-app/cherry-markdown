@@ -151,3 +151,30 @@ export function exportHTMLFile(HTMLText, fileName) {
   aLink.click();
   document.body.removeChild(aLink);
 }
+
+export function exportBase64(previewDom, format = 'image/png') {
+  return new Promise((resolve) => {
+    getReadyToExport(
+      previewDom,
+      function (
+        /** @type {HTMLElement}*/
+        cherryPreviewer,
+        /** @type {function}*/
+        thenFinish,
+      ) {
+        window.scrollTo(0, 0);
+        html2canvas(cherryPreviewer, {
+          allowTaint: true,
+          height: cherryPreviewer.clientHeight,
+          width: cherryPreviewer.clientWidth,
+          scrollY: 0,
+          scrollX: 0,
+        }).then(function (canvas) {
+          const imgData = canvas.toDataURL(format);
+          thenFinish();
+          return resolve(imgData);
+        });
+      },
+    );
+  });
+}

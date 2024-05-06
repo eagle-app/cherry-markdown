@@ -752,7 +752,7 @@ export default class Cherry extends CherryStatic {
    * @param {string} [fileName] 导出文件名(默认为当前第一行内容|'cherry-export')
    */
   export(type = 'pdf', fileName = '') {
-    this.previewer.export(type, fileName);
+    return this.previewer.export(type, fileName);
   }
 
   /**

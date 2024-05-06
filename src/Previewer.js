@@ -22,7 +22,7 @@ import Logger from './Logger';
 import Event from './Event';
 // import locale from './utils/locale';
 import { addEvent, removeEvent } from './utils/event';
-import { exportPDF, exportScreenShot, exportMarkdownFile, exportHTMLFile } from './utils/export';
+import { exportPDF, exportScreenShot, exportMarkdownFile, exportHTMLFile, exportBase64 } from './utils/export';
 import PreviewerBubble from './toolbars/PreviewerBubble';
 import LazyLoadImg from '@/utils/lazyLoadImg';
 
@@ -958,7 +958,7 @@ export default class Previewer {
    * 'pdf'：导出成pdf文件; 'img' | screenShot：导出成png图片; 'markdown'：导出成markdown文件; 'html'：导出成html文件;
    * @param {string} [fileName] 导出文件名
    */
-  export(type = 'pdf', fileName = '') {
+  async export(type = 'pdf', fileName = '') {
     const name = fileName || this.getDomContainer().innerText.match(/^\s*([^\s][^\n]*)\n/)[1] || 'cherry-export';
     if (type === 'pdf') {
       exportPDF(this.getDomContainer(), name);
@@ -968,6 +968,10 @@ export default class Previewer {
       exportMarkdownFile(this.$cherry.getMarkdown(), name);
     } else if (type === 'html') {
       exportHTMLFile(this.getValue(), name);
+    } else if (type === 'png') {
+      return exportBase64(this.getDomContainer(), 'image/png');
+    } else if (type === 'jpeg' || type === 'jpg') {
+      return exportBase64(this.getDomContainer(), 'image/jpeg');
     }
   }
 }
