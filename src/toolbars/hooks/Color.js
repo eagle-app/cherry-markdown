@@ -214,12 +214,12 @@ class BubbleColor {
     $colorWrap.classList.add('cherry-dropdown');
     const $textWrap = document.createElement('div');
     $textWrap.classList.add('cherry-color-text');
-    $textWrap.innerHTML = this.getFontColorDom('文本颜色');
+    $textWrap.innerHTML = this.getFontColorDom(this.editor.$cherry.locale.textColor);
     $colorWrap.appendChild($textWrap);
 
     const $bgWrap = document.createElement('div');
     $bgWrap.classList.add('cherry-color-bg');
-    $bgWrap.innerHTML = this.getFontColorDom('背景颜色');
+    $bgWrap.innerHTML = this.getFontColorDom(this.editor.$cherry.locale.bgColor);
     $colorWrap.appendChild($bgWrap);
 
     return $colorWrap;

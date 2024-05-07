@@ -15,6 +15,8 @@ export default {
   quote: '引用',
   size: 'サイズ',
   color: 'テキスト色＆背景',
+  textColor: 'テキスト色',
+  bgColor: '背景色',
   strikethrough: '取り消し線',
   sub: '下付き文字',
   sup: '上付き文字',
