@@ -16,8 +16,12 @@
 
 import zhCn from './zh_CN';
 import enUs from './en_US';
+import jaJp from './ja_JP';
+import zhTw from './zh_TW';
 
 export default {
   zh_CN: zhCn,
   en_US: enUs,
+  ja_JP: jaJp,
+  zh_TW: zhTw,
 };
